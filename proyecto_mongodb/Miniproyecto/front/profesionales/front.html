@@ -7,6 +7,8 @@
      <!-- Bootstrap -->
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+     <!-- Favicon -->
+    <link rel="shortcut icon" href="https://www.guarroman.es/wp-content/uploads/2021/07/1823382-750x447-1.jpg" type="image/x-icon">
      <!-- Propio -->
     <link rel="stylesheet" href="front.css">
     <title>Profesionales</title>
@@ -17,14 +19,20 @@
         <!-- Formulario -->
         <form>
             <div class="formulariopadre">
-                <h1>Alumnos</h1>
+                <h1>Profesionales</h1>
                     <div class="formulario">
                         <label for="name">Nombre:</label>
                         <input type="text" placeholder="Name" id="name" class="formu"><br>
-                        <label for="apellido">Apellido:</label>
-                        <input type="text" placeholder="Apellido" id="apellido" class="formu"><br> 
+                        <label for="edad">Edad:</label>
+                        <input type="text" placeholder="Edad" id="edad" class="formu"><br>
+                        <label for="genero">Género:</label>
+                        <input type="text" placeholder="Género" id="genero" class="formu"><br>
+                        <label for="apellido">Nacionalidad:</label>
+                        <input type="text" placeholder="Nacionalidad" id="nacionalidad" class="formu"><br> 
+                        <label for="profesion">Profesión:</label>
+                        <input type="text" placeholder="Profesión" id="profesion" class="formu"><br> 
                         <label for="id">ID:</label>
-                        <input type="number" placeholder="Id" id="id" class="formu"><br>
+                        <input type="text" placeholder="Id" id="id" class="formu"><br>
                         
                         <button type="button" onclick="getProfes()" class="formu">Mostrar</button>
                         <button type="button" onclick="postProfes()" class="formu">Crear</button>

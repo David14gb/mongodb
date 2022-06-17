@@ -6,7 +6,8 @@ const peliculasSchema = new Schema({
     language: String,
     actors: [String],
     director: [String],
-    guionista: [String]
+    guionista: [String],
+    productora: [String]
 })
 
 module.exports = model('peliculas', peliculasSchema, 'peliculas')

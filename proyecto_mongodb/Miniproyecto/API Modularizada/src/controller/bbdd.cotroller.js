@@ -13,12 +13,12 @@ function getProfes(request, response){
     if(request.query.id){
 
         ProfeModel.findById(request.query.id )
-        .then( (profe) => {
+        .then((profe) => {
             console.log(profe);
             response.send(profe);
         })
-        .catch( (err) => {
-            console.log( err );
+        .catch((err) => {
+            console.log(err);
         })
     }else{
 
@@ -69,7 +69,7 @@ function putProfes(request, response){
     let profesion = request.body.profesion;
     let id = request.body.id
 
-    ProfeModel.updateOne({id: id}, 
+    ProfeModel.findByIdAndUpdate(id, 
                         {name: name,
                          edad: edad,
                          genero: genero,
@@ -90,12 +90,12 @@ function putProfes(request, response){
 
 function deleteProfes(request, response){
 
-    ProfeModel.findOneAndDelete({id: request.query.id})
-        .then(function(photoss)
+    ProfeModel.findByIdAndDelete(request.body.id)
+        .then(function(profe)
         {
             console.log("Correderamente Borrado")
-            console.log(photoss);
-            response.send(photoss)
+            console.log(profe);
+            response.send(profe)
         })
         .catch(function()
         {

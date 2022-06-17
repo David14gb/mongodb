@@ -22,9 +22,12 @@ async function getProfes(){
             for(let i = 0; i<result.length; i++){
                 imp += ` <div class="card mt-5" style="width: 18rem;">
                 <div class="card-body">
-                        <h5 class="card-title">Nombre: ${result[i].first_name}</h5>
-                        <p class="card-text">Apellido: ${result[i].last_name}</p>
-                        <p class="card-text">ID: ${result[i].student_id}</p>
+                        <h5 class="card-title">Nombre: ${result[i].name}</h5>
+                        <p class="card-text">Edad: ${result[i].edad}</p>
+                        <p class="card-text">Género: ${result[i].genero}</p>
+                        <p class="card-text">Nacionalidad: ${result[i].nacionalidad}</p>
+                        <p class="card-text">Profesión: ${result[i].profesion}</p>
+                        <p class="card-text">ID: ${result[i]._id}</p>
                     </div>
                 </div>
                 <div class="col-1"></div>`
@@ -33,10 +36,12 @@ async function getProfes(){
             document.getElementById("todos").innerHTML = imp;
         }else{
             imp = ` <div class="card mt-5" style="width: 18rem;">
-                        <div class="card-body">
-                        <h5 class="card-title">Nombre: ${result[i].first_name}</h5>
-                        <p class="card-text">Apellido: ${result[i].last_name}</p>
-                        <p class="card-text">ID: ${result[i].student_id}</p>
+                        <h5 class="card-title">Nombre: ${result.name}</h5>
+                        <p class="card-text">Edad: ${result.edad}</p>
+                        <p class="card-text">Género: ${result.genero}</p>
+                        <p class="card-text">Nacionalidad: ${result.nacionalidad}</p>
+                        <p class="card-text">Profesión: ${result.profesion}</p>
+                        <p class="card-text">ID: ${result._id}</p>
                     </div>
                     </div>
                     <div class="col-1"></div>`
@@ -49,19 +54,25 @@ async function getProfes(){
 
 async function postProfes(){
 
-    // Clase Alumno
-    class Alumno{
-    constructor(first_name, last_name){
-            this.first_name = first_name
-            this.last_name = last_name
+    // Clase profe
+    class Profe{
+    constructor(name, edad, genero, nacionalidad, profesion){
+            this.name = name
+            this.edad = edad
+            this.genero = genero
+            this.nacionalidad = nacionalidad
+            this.profesion = profesion
         }
     }
 
     // Post
     try{
 
-    let user = new Alumno(document.getElementById("name").value, 
-                                document.getElementById("apellido").value) 
+    let user = new Profe(document.getElementById("name").value, 
+                         document.getElementById("edad").value, 
+                         document.getElementById("genero").value, 
+                         document.getElementById("nacionalidad").value, 
+                         document.getElementById("profesion").value) 
                                 // ,document.getElementById("id").value)
 
     let url = `http://localhost:3000/profesionales`;
@@ -83,16 +94,31 @@ async function postProfes(){
 async function putProfes(){
     let id = document.getElementById("id").value;
     let nombre = document.getElementById("name").value;
-    let apellido = document.getElementById("apellido").value; 
-    let json ={ "first_name" : nombre ? nombre:null,
-                "last_name" : apellido ? apellido:null,
-                "student_id" : id}
+    let edad = document.getElementById("edad").value; 
+    let genero = document.getElementById("genero").value; 
+    let nacionalidad = document.getElementById("nacionalidad").value; 
+    let profesion = document.getElementById("profesion").value; 
+    let json = { "name" : nombre ? nombre:result.name,
+                "edad" : edad ? edad:result.edad,
+                "genero" : genero ? genero:result.genero,
+                "nacionalidad" : nacionalidad ? nacionalidad:result.nacionalidad,
+                "profesion" : profesion ? profesion:result.profesion,
+                "id" : id}
+    let body = {}  
+    
+    
+    for(prop in json){
+        
+        if(json[prop] != null){
+           body[prop] = json[prop]
+        }
+    }
                 
     // Url para cambiar
     let url = `http://localhost:3000/profesionales`;
     let param = {
         headers:{"Content-type": "application/json; charset=UTF-8"},
-        body: JSON.stringify(json),
+        body: JSON.stringify(body),
         method: "PUT"
     }
     let data = await fetch(url, param);
