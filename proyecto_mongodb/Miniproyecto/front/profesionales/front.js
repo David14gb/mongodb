@@ -98,11 +98,11 @@ async function putProfes(){
     let genero = document.getElementById("genero").value; 
     let nacionalidad = document.getElementById("nacionalidad").value; 
     let profesion = document.getElementById("profesion").value; 
-    let json = { "name" : nombre ? nombre:result.name,
-                "edad" : edad ? edad:result.edad,
-                "genero" : genero ? genero:result.genero,
-                "nacionalidad" : nacionalidad ? nacionalidad:result.nacionalidad,
-                "profesion" : profesion ? profesion:result.profesion,
+    let json = { "name" : nombre ? nombre:null,
+                "edad" : edad ? edad:null,
+                "genero" : genero ? genero:null,
+                "nacionalidad" : nacionalidad ? nacionalidad:null,
+                "profesion" : profesion ? profesion:null,
                 "id" : id}
     let body = {}  
     

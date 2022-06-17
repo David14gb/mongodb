@@ -1,0 +1,87 @@
+/* Formulario */
+.formulariopadre{
+    width: 460px; 
+    height: auto;
+    margin: 80px auto;
+    border-radius: 10px;  
+    padding-top: 30px;
+    padding-bottom: 20px;  
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding-left: 30px; 
+    border: 3px solid black;
+}
+input{
+    background-color: red; 
+    width: 408px; 
+    height: 40px; 
+    border-radius: 5px;  
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: black; 
+    margin-top: 10px;  
+    padding-left: 10px;
+    margin-bottom: 20px; 
+}
+textarea{
+    background-color: #fbfbfb; 
+    width: 405px; 
+    height: 150px; 
+    border-radius: 5px;  
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: black; 
+    margin-top: 10px;  
+    padding-left: 10px;
+    margin-bottom: 20px; 
+    padding-top: 15px; 
+}
+button{
+    height: 45px; 
+    padding-left: 5px;
+    padding-right: 5px;   
+    margin-bottom: 20px; 
+    margin-top: 10px;   
+    text-transform: uppercase;
+    color: red;
+    background-color: rgba(0, 0, 0, 0.5); 
+    border-color: black; 
+    border-radius: 10px;  
+    width: 405px;   
+    cursor: pointer;
+}
+button:hover{
+    background-color: rgba(100, 0, 0, 0.5);
+}
+h1{
+    font-size: 39px;  
+    text-align: letf; 
+    padding-bottom: 20px; 
+    color: red;
+}
+
+/* Body */
+body{
+    background-image: url("https://i.pinimg.com/550x/12/c9/56/12c956316d70bd5e0abd2b1cd351e17d.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Cajas de los profesionales */
+
+.mostrar__profes{
+    font-size:x-large;
+    font-weight: 700;
+    margin-left: 5%;
+}
+.card{
+    background-color: rgba(0, 0, 0, 0.5); 
+    border: 3px solid red;
+    border-radius: 10px;  
+    margin: 1%;
+    padding: 1%;
+    color: red;
+}
+.card:hover{
+    background-color: rgba(100, 0, 0, 0.5);
+    color: red;
+}
