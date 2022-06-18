@@ -16,7 +16,14 @@ async function getProfes(){
         let data = await fetch(url, param)
         let result = await data.json();
         console.log(result);
-
+        if(result.err){
+            console.log("Hay un error");
+            showToast("ERROR: " + result.err, "bg-danger");
+        }
+        else{
+            console.log("No hay error");
+            showToast("Usuario/s Mostrado/s Correctamente", "bg-success");
+        }
         if(result.length > 0){
             imp= "";
             for(let i = 0; i<result.length; i++){
@@ -49,6 +56,7 @@ async function getProfes(){
         }
     }catch(e){           
         console.log(e);
+        showToast("Introduce un Id que exista", "bg-danger");
     }
 }
 
@@ -76,17 +84,28 @@ async function postProfes(){
                                 // ,document.getElementById("id").value)
 
     let url = `http://localhost:3000/profesionales`;
-    let param = {
-        headers:{"Content-type": "application/json; charset=UTF-8"},
-        body: JSON.stringify(user),
-        method: "POST"
+
+    if(validar(user)){
+        let param = {
+            headers:{"Content-type": "application/json; charset=UTF-8"},
+            body: JSON.stringify(user),
+            method: "POST"
+        }
+        let data = await fetch(url, param);
+        let result = await data.json();
+
+        console.log(result);
+        if(result.err){
+            console.log("Hay un error");
+            showToast("ERROR: " + result.err, "bg-danger");
+        }
+        else{
+            console.log("No hay error");
+            showToast("Usuario Creado Correctamente", "bg-success");
+        }
     }
-    let data = await fetch(url, param);
-    let result = await data.json();
-
-    console.log(result);
-
     }catch(error){
+        showToast("ERROR: Fallo en la comunicación con el API REST", "bg-danger")
         console.log(error);
     }
 }
@@ -125,6 +144,14 @@ async function putProfes(){
     console.log(data);
     let result = await data.json();
     console.log(result);
+    if(result.err){
+        console.log("Hay un error");
+        showToast("ERROR: " + result.err, "bg-danger");
+    }
+    else{
+        console.log("No hay error");
+        showToast("Usuario Actualizado Correctamente", "bg-success");
+    }
 
 }
 async function deleteProfes(){
@@ -142,25 +169,59 @@ async function deleteProfes(){
         let data = await fetch(url, param);
         let result = await data.json();
         console.log(result);
-        if(result.resultado.length > id){
-            result.resultado.splice(id, 1);
-            console.log(result);
+        if(result.err){
+            console.log("Hay un error");
+            showToast("ERROR: " + result.err, "bg-danger");
         }
+        else{
+            console.log("No hay error");
+            showToast("Usuario Borrado Correctamente", "bg-success");
+        }
+
     }catch(error){
 
-        // showToast("ERROR: Fallo en la comunicación con el API REST")
+        showToast("ERROR: Fallo en la comunicación con el API REST", "bg-danger")
         console.log(error);  
     }
     
 }
 
+function validar (user){
 
-// function showToast(message){
-//     document.getElementById("toastText").innerText=message;
-//     let toastElement  = document.getElementById('toast')
+    let resultado = false;
 
-//     toastElement.className = toastElement.className.replace("bg-warning").replace("bg-danger") + " "  + color;
+    if(user.name == ''){
+        showToast("AVISO: Campo nombre no informado", "bg-warning");
+        console.log("AVISO: Campo nombre no informado", "bg-warning");
+    }
+    else if(user.edad == ''){
+        showToast("AVISO: Campo edad no informado", "bg-warning");
+        console.log("AVISO: Campo nombre no informado", "bg-warning");
+    }
+    else if(user.genero == ''){
+        showToast("AVISO: Campo género no informado", "bg-warning");
+        console.log("AVISO: Campo nombre no informado", "bg-warning");
+    }
+    else if( user.nacionalidad == ''){
+        showToast("AVISO: Campo nacionalidad no informado", "bg-warning");
+        console.log("AVISO: Campo nombre no informado", "bg-warning");
+    }
+    else if(user.profesion == ''){
+        showToast("AVISO: Campo profesion no informado", "bg-warning");
+        console.log("AVISO: Campo nombre no informado", "bg-warning");
+    }
+    else{
+        resultado = true;
+    }
+    return resultado;
+}
 
-//     let toast = new bootstrap.Toast(toastElement)
-//     toast.show()
-// }
+function showToast(message, color){
+    document.getElementById("toastText").innerText=message;
+    let toastElement  = document.getElementById('toast')
+
+    toastElement.className = toastElement.className.replace("bg-warning").replace("bg-danger") + " " + color;
+
+    let toast = new bootstrap.Toast(toastElement)
+    toast.show()
+}

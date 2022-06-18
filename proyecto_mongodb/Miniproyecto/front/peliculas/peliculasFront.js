@@ -16,6 +16,14 @@ async function getMovie(){
         let data = await fetch(url, param)
         let result = await data.json();
         console.log(result);
+        if(result.err){
+            console.log("Hay un error");
+            showToast("ERROR: " + result.err, "bg-danger");
+        }
+        else{
+            console.log("No hay error");
+            showToast("Película/s Mostrada/s Correctamente", "bg-success");
+        }
 
         if(result.length > 0){
             imp= "";
@@ -45,6 +53,7 @@ async function getMovie(){
         }
     }catch(e){           
         console.log(e);
+        showToast("Introduce un Id que exista", "bg-danger");
     }
 }
 
@@ -84,7 +93,7 @@ async function postMovie(){
                 showToast("ERROR: " + result.err, "bg-danger");
             }
             else{
-                showToast("Usuario Creado Correctamente", "bg-success");
+                showToast("Película Creada Correctamente", "bg-success");
             }
         }
     }catch(error){
@@ -123,6 +132,14 @@ async function putMovie(){
     console.log(data);
     let result = await data.json();
     console.log(result);
+    if(result.err){
+        console.log("Hay un error");
+        showToast("ERROR: " + result.err, "bg-danger");
+    }
+    else{
+        console.log("No hay error");
+        showToast("Película actualizada Correctamente", "bg-success");
+    }
 
 }
 async function deleteMovie(){
@@ -140,13 +157,18 @@ async function deleteMovie(){
         let data = await fetch(url, param);
         let result = await data.json();
         console.log(result);
-        if(result.resultado.length > id){
-            result.resultado.splice(id, 1);
-            console.log(result);
+        if(result.err){
+            console.log("Hay un error");
+            showToast("ERROR: " + result.err, "bg-danger");
         }
+        else{
+            console.log("No hay error");
+            showToast("Película eliminado correctamente", "bg-success");
+        }
+
     }catch(error){
 
-        // showToast("ERROR: Fallo en la comunicación con el API REST")
+        showToast("ERROR: Fallo en la comunicación con el API REST")
         console.log(error);  
     }
     
@@ -157,31 +179,27 @@ function validar (user){
 
     let resultado = false;
 
-    if(user.title == '' + user.title == "null" ){
-        showToast("AVISO: Campo nombre no informado", "bg-warning");
+    if(user.title == ''){
+        showToast("AVISO: Campo Título no informado", "bg-warning");
     }
-    else if( user.year == '' +  user.year == "null"){
-        showToast("AVISO: Campo apellido no informado", "bg-warning");
+    else if( user.year == ''){
+        showToast("AVISO: Campo Año no informado", "bg-warning");
+    }
+    else if( user.language == ''){
+        showToast("AVISO: Campo Idioma no informado", "bg-warning");
     }
     else{
         resultado = true;
     }
 
     return resultado;
+}
+function showToast(message, color){
     document.getElementById("toastText").innerText=message;
     let toastElement  = document.getElementById('toast')
 
-    toastElement.className = toastElement.className.replace("bg-warning").replace("bg-danger") + " "  + color;
+    toastElement.className = toastElement.className.replace("bg-warning").replace("bg-danger") + " " + color;
 
     let toast = new bootstrap.Toast(toastElement)
     toast.show()
 }
-// {
-//     document.getElementById("toastText").innerText=message;
-//     let toastElement  = document.getElementById('toast')
-
-//     toastElement.className = toastElement.className.replace("bg-warning").replace("bg-danger") + " "  + color;
-
-//     let toast = new bootstrap.Toast(toastElement)
-//     toast.show()
-// }
